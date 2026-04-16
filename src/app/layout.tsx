@@ -69,11 +69,20 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     title: SEO_DEFAULT_TITLE,
     description: SEO_DESCRIPTION,
+    images: [
+      {
+        url: "/og.png",
+        width: 1024,
+        height: 502,
+        alt: `${SITE_NAME} — IELTS hero`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: SEO_DEFAULT_TITLE,
     description: SEO_DESCRIPTION,
+    images: ["/og.png"],
   },
 };
 

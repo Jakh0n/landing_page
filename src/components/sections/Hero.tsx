@@ -57,13 +57,13 @@ export function Hero() {
           className="mx-auto max-w-4xl text-center"
         >
           <motion.div variants={fadeInUp} className="mb-5 flex justify-center sm:mb-6">
-            <span className="flex w-full max-w-xl items-center gap-2 rounded-full border border-border/80 bg-muted/40 px-3 py-2 text-xs font-medium text-muted-foreground sm:inline-flex sm:w-fit sm:max-w-none sm:px-4 sm:py-2.5 sm:text-sm">
-              <span className="relative flex size-2 shrink-0">
+            <span className="grid w-full max-w-xl grid-cols-[auto_1fr] items-start gap-x-2 rounded-2xl border border-border/80 bg-muted/40 px-4 py-3 text-xs font-medium leading-snug text-muted-foreground sm:inline-flex sm:w-fit sm:max-w-none sm:items-center sm:gap-2 sm:rounded-full sm:px-4 sm:py-2.5 sm:text-sm sm:leading-normal">
+              <span className="relative mt-1 flex size-2 shrink-0 sm:mt-0.5">
                 <span className="absolute inline-flex size-full animate-ping rounded-full bg-green-400 opacity-75" />
                 <span className="relative inline-flex size-2 rounded-full bg-green-500" />
               </span>
               <span
-                className="min-w-0 flex-1 touch-pan-x overflow-x-auto whitespace-nowrap text-left [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:flex-none sm:overflow-visible"
+                className="min-w-0 text-center text-balance sm:text-left"
                 title={HERO.badge}
               >
                 {HERO.badge}
