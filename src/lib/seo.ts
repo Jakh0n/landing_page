@@ -1,9 +1,24 @@
 import { CONTACT_INFO, FAQ_ITEMS, SITE_NAME, SITE_TAGLINE } from "@/lib/constants";
 
-/** Ishlab chiqarishda NEXT_PUBLIC_SITE_URL ni o‘rnatish tavsiya etiladi (masalan https://ezyly.uz) */
+/**
+ * Sayt URL (metadata, og:image, canonical, schema).
+ * 1) NEXT_PUBLIC_SITE_URL — prod domen (ustun)
+ * 2) VERCEL_URL — Vercel deploy (masalan ezyly.vercel.app), og:rasm to‘g‘ri ishlashi uchun muhim
+ * 3) fallback
+ */
 export function getSiteUrl(): string {
-  const raw = process.env.NEXT_PUBLIC_SITE_URL ?? "https://ezyly.uz";
-  return raw.replace(/\/$/, "");
+  const explicit = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (explicit) {
+    return explicit.replace(/\/$/, "");
+  }
+
+  const vercel = process.env.VERCEL_URL?.trim();
+  if (vercel) {
+    const host = vercel.replace(/^https?:\/\//, "");
+    return `https://${host.replace(/\/$/, "")}`;
+  }
+
+  return "https://ezyly.uz";
 }
 
 export const SEO_DEFAULT_TITLE = `${SITE_NAME} — IELTS va ingliz tili markazi`;
