@@ -1,3 +1,4 @@
+import { HomeJsonLd } from "@/components/seo/HomeJsonLd";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
@@ -10,10 +11,13 @@ import { Pricing } from "@/components/sections/Pricing";
 import { FAQ } from "@/components/sections/FAQ";
 import { CTA } from "@/components/sections/CTA";
 import { Contact } from "@/components/sections/Contact";
+import { ExitLeadPopup } from "@/components/layout/ExitLeadPopup";
 
 export default function HomePage() {
   return (
     <>
+      <HomeJsonLd />
+      <ExitLeadPopup />
       <Navbar />
       <main>
         <Hero />

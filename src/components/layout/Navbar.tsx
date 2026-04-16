@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { GraduationCap } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { BrandLogoIcon } from "@/components/ui/BrandLogoIcon";
 import { MobileMenu } from "./MobileMenu";
-import { NAV_LINKS, SITE_NAME } from "@/lib/constants";
+import { NAV_LINKS, NAVBAR_CTA, SITE_NAME } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
@@ -44,20 +44,22 @@ export function Navbar() {
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-300",
+        "fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)] transition-all duration-300",
         scrolled
           ? "border-b bg-background/80 shadow-sm backdrop-blur-md"
-          : "bg-transparent"
+          : "bg-transparent",
       )}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-2 px-3 min-[400px]:px-4 sm:h-16 sm:px-6 lg:px-8">
         <button
           onClick={() => scrollTo("#hero")}
-          className="flex items-center gap-2"
-          aria-label="Go to top"
+          className="flex min-w-0 max-w-[65%] items-center gap-2 touch-manipulation sm:gap-2.5 sm:max-w-none"
+          aria-label="Bosh sahifaga"
         >
-          <GraduationCap className="size-8 text-indigo-600" />
-          <span className="text-xl font-bold">{SITE_NAME}</span>
+          <BrandLogoIcon className="size-7 shrink-0 sm:size-8" />
+          <span className="truncate text-left text-base font-bold tracking-tight text-foreground sm:text-xl">
+            {SITE_NAME}
+          </span>
         </button>
 
         <nav className="hidden items-center gap-1 lg:flex">
@@ -69,7 +71,7 @@ export function Navbar() {
                 "rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:text-indigo-600",
                 activeSection === link.href
                   ? "text-indigo-600"
-                  : "text-muted-foreground"
+                  : "text-muted-foreground",
               )}
             >
               {link.label}
@@ -77,12 +79,12 @@ export function Navbar() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex shrink-0 items-center gap-2 sm:gap-3">
           <Button
-            className="hidden bg-indigo-600 hover:bg-indigo-700 sm:inline-flex"
+            className="hidden touch-manipulation bg-indigo-600 hover:bg-indigo-700 sm:inline-flex sm:h-9 sm:px-4 sm:text-sm"
             onClick={() => scrollTo("#pricing")}
           >
-            Get Started
+            {NAVBAR_CTA}
           </Button>
           <MobileMenu />
         </div>

@@ -1,14 +1,20 @@
 "use client";
 
-import { GraduationCap, Send, MessageSquare, Globe, Camera, Video } from "lucide-react";
+import { Send, MessageSquare, Globe, Camera, Video } from "lucide-react";
+import { BrandLogoIcon } from "@/components/ui/BrandLogoIcon";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { SITE_NAME, SITE_TAGLINE, FOOTER_LINKS } from "@/lib/constants";
+import {
+  SITE_NAME,
+  SITE_TAGLINE,
+  FOOTER_LINKS,
+  FOOTER_UI,
+} from "@/lib/constants";
 
 const SOCIAL_LINKS = [
-  { icon: MessageSquare, label: "Twitter", href: "#" },
-  { icon: Globe, label: "Facebook", href: "#" },
+  { icon: MessageSquare, label: "Telegram", href: "#" },
+  { icon: Globe, label: "Sayt", href: "#" },
   { icon: Camera, label: "Instagram", href: "#" },
   { icon: Video, label: "YouTube", href: "#" },
 ];
@@ -16,11 +22,11 @@ const SOCIAL_LINKS = [
 export function Footer() {
   return (
     <footer className="border-t bg-muted/30">
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-5">
+      <div className="mx-auto max-w-7xl px-3 py-12 min-[400px]:px-4 sm:px-6 sm:py-16 lg:px-8">
+        <div className="grid gap-10 md:grid-cols-2 md:gap-12 lg:grid-cols-5">
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2">
-              <GraduationCap className="size-8 text-indigo-600" />
+              <BrandLogoIcon className="size-8" />
               <span className="text-xl font-bold">{SITE_NAME}</span>
             </div>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
@@ -42,7 +48,7 @@ export function Footer() {
 
           <div>
             <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider">
-              About
+              {FOOTER_UI.aboutTitle}
             </h4>
             <ul className="space-y-3">
               {FOOTER_LINKS.about.map((link) => (
@@ -60,7 +66,7 @@ export function Footer() {
 
           <div>
             <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider">
-              Courses
+              {FOOTER_UI.coursesTitle}
             </h4>
             <ul className="space-y-3">
               {FOOTER_LINKS.courses.map((link) => (
@@ -78,26 +84,26 @@ export function Footer() {
 
           <div>
             <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider">
-              Newsletter
+              {FOOTER_UI.newsletterTitle}
             </h4>
             <p className="mb-4 text-sm text-muted-foreground">
-              Get the latest updates and exclusive offers.
+              {FOOTER_UI.newsletterText}
             </p>
             <form
               onSubmit={(e) => e.preventDefault()}
-              className="flex gap-2"
+              className="flex min-w-0 flex-col gap-2 sm:flex-row"
             >
               <Input
                 type="email"
-                placeholder="Your email"
-                className="h-9"
-                aria-label="Email for newsletter"
+                placeholder={FOOTER_UI.emailPlaceholder}
+                className="h-10 min-h-10 w-full sm:h-9 sm:min-h-0"
+                aria-label={FOOTER_UI.emailPlaceholder}
               />
               <Button
                 type="submit"
                 size="icon"
                 className="size-9 shrink-0 bg-indigo-600 hover:bg-indigo-700"
-                aria-label="Subscribe"
+                aria-label={FOOTER_UI.subscribeAria}
               >
                 <Send className="size-4" />
               </Button>
@@ -109,9 +115,9 @@ export function Footer() {
 
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
           <p className="text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} {SITE_NAME}. All rights reserved.
+            © {new Date().getFullYear()} {SITE_NAME}. {FOOTER_UI.rights}
           </p>
-          <div className="flex gap-6">
+          <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
             {FOOTER_LINKS.company.map((link) => (
               <a
                 key={link.label}

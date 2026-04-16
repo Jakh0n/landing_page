@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Star, Users, MessageSquare, Briefcase, Code2 } from "lucide-react";
 import type { Teacher } from "@/types";
@@ -15,23 +16,23 @@ export function TeacherCard({ teacher }: TeacherCardProps) {
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       className="group relative overflow-hidden rounded-2xl border bg-card shadow-sm transition-shadow hover:shadow-xl"
     >
-      <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-indigo-400 to-violet-500">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-6xl font-bold text-white/30">
-            {teacher.name.charAt(0)}
-          </span>
-        </div>
+      <div className="relative aspect-square overflow-hidden bg-muted">
+        <Image
+          src={teacher.avatar}
+          alt={teacher.name}
+          fill
+          className="object-cover transition-transform duration-300 group-hover:scale-105"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+        />
 
-        <div className="absolute inset-0 flex translate-y-full flex-col items-center justify-center bg-black/70 p-6 text-center transition-transform duration-300 group-hover:translate-y-0">
-          <p className="mb-4 text-sm leading-relaxed text-white/90">
-            {teacher.bio}
-          </p>
+        <div className="absolute inset-0 flex translate-y-full flex-col items-center justify-center bg-black/75 p-6 text-center transition-transform duration-300 group-hover:translate-y-0">
+          <p className="mb-4 text-sm leading-relaxed text-white/95">{teacher.bio}</p>
           <div className="flex gap-3">
             {teacher.socials.twitter && (
               <a
                 href={teacher.socials.twitter}
                 className="rounded-full bg-white/20 p-2 transition-colors hover:bg-white/30"
-                aria-label={`${teacher.name} Twitter`}
+                aria-label={`${teacher.name} — social`}
               >
                 <MessageSquare className="size-4 text-white" />
               </a>
@@ -40,7 +41,7 @@ export function TeacherCard({ teacher }: TeacherCardProps) {
               <a
                 href={teacher.socials.linkedin}
                 className="rounded-full bg-white/20 p-2 transition-colors hover:bg-white/30"
-                aria-label={`${teacher.name} LinkedIn`}
+                aria-label={`${teacher.name} — LinkedIn`}
               >
                 <Briefcase className="size-4 text-white" />
               </a>
@@ -49,7 +50,7 @@ export function TeacherCard({ teacher }: TeacherCardProps) {
               <a
                 href={teacher.socials.github}
                 className="rounded-full bg-white/20 p-2 transition-colors hover:bg-white/30"
-                aria-label={`${teacher.name} GitHub`}
+                aria-label={`${teacher.name} — link`}
               >
                 <Code2 className="size-4 text-white" />
               </a>

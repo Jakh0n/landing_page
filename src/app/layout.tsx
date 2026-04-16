@@ -1,7 +1,14 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { SITE_NAME } from "@/lib/constants";
+import {
+  getSiteUrl,
+  SEO_DEFAULT_TITLE,
+  SEO_DESCRIPTION,
+  SEO_KEYWORDS,
+} from "@/lib/seo";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -13,18 +20,61 @@ const jakarta = Plus_Jakarta_Sans({
   variable: "--font-heading",
 });
 
-export const metadata: Metadata = {
-  title: "EduPrime Academy — Master New Skills Online",
-  description:
-    "Join over 10,000 students worldwide. Access 200+ expert-led courses, earn recognized certificates, and transform your career with hands-on learning.",
-  keywords: [
-    "online learning",
-    "courses",
-    "education",
-    "programming",
-    "design",
-    "certificates",
+const siteUrl = getSiteUrl();
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fafafa" },
+    { media: "(prefers-color-scheme: dark)", color: "#0f0f1a" },
   ],
+};
+
+export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: SEO_DEFAULT_TITLE,
+    template: `%s | ${SITE_NAME}`,
+  },
+  description: SEO_DESCRIPTION,
+  keywords: [...SEO_KEYWORDS],
+  applicationName: SITE_NAME,
+  category: "education",
+  authors: [{ name: SITE_NAME, url: siteUrl }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
+  },
+  alternates: {
+    canonical: "/",
+    languages: {
+      uz: "/",
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "uz_UZ",
+    url: siteUrl,
+    siteName: SITE_NAME,
+    title: SEO_DEFAULT_TITLE,
+    description: SEO_DESCRIPTION,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SEO_DEFAULT_TITLE,
+    description: SEO_DESCRIPTION,
+  },
 };
 
 export default function RootLayout({
@@ -34,10 +84,12 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="uz"
       className={cn(inter.variable, jakarta.variable, "antialiased")}
     >
-      <body className="min-h-screen">{children}</body>
+      <body className="min-h-screen min-h-[100dvh] pb-[env(safe-area-inset-bottom)]">
+        {children}
+      </body>
     </html>
   );
 }

@@ -7,19 +7,23 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { CONTACT_INFO } from "@/lib/constants";
+import {
+  CONTACT_INFO,
+  SECTION_COPY,
+  CONTACT_FORM,
+} from "@/lib/constants";
 import { fadeInLeft, fadeInRight, staggerContainer, viewportConfig } from "@/lib/animations";
 
 const CONTACT_DETAILS = [
-  { icon: MapPin, label: "Address", value: CONTACT_INFO.address },
-  { icon: Phone, label: "Phone", value: CONTACT_INFO.phone },
+  { icon: MapPin, label: "Manzil", value: CONTACT_INFO.address },
+  { icon: Phone, label: "Telefon", value: CONTACT_INFO.phone },
   { icon: Mail, label: "Email", value: CONTACT_INFO.email },
-  { icon: Clock, label: "Working Hours", value: CONTACT_INFO.hours },
+  { icon: Clock, label: "Ish vaqti", value: CONTACT_INFO.hours },
 ];
 
 const SOCIALS = [
-  { icon: MessageSquare, label: "Twitter", href: "#" },
-  { icon: Globe, label: "Facebook", href: "#" },
+  { icon: MessageSquare, label: "Telegram", href: "#" },
+  { icon: Globe, label: "Sayt", href: "#" },
   { icon: Camera, label: "Instagram", href: "#" },
 ];
 
@@ -34,44 +38,42 @@ export function Contact() {
     (e.target as HTMLFormElement).reset();
   };
 
+  const { badge, title, subtitle } = SECTION_COPY.contact;
+
   return (
-    <section id="contact" className="py-20 lg:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHeading
-          badge="Get in Touch"
-          title="Contact Us"
-          subtitle="Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible."
-        />
+    <section id="contact" className="py-12 sm:py-16 md:py-20 lg:py-32">
+      <div className="mx-auto max-w-7xl px-3 min-[400px]:px-4 sm:px-6 lg:px-8">
+        <SectionHeading badge={badge} title={title} subtitle={subtitle} />
 
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
           viewport={viewportConfig}
-          className="grid gap-12 lg:grid-cols-2"
+          className="grid gap-10 lg:grid-cols-2 lg:gap-12"
         >
           <motion.div variants={fadeInLeft}>
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="grid gap-5 sm:grid-cols-2">
                 <div>
                   <label htmlFor="name" className="mb-2 block text-sm font-medium">
-                    Name
+                    {CONTACT_FORM.name}
                   </label>
                   <Input
                     id="name"
-                    placeholder="John Doe"
+                    placeholder={CONTACT_FORM.namePh}
                     required
                     className="h-11"
                   />
                 </div>
                 <div>
                   <label htmlFor="email" className="mb-2 block text-sm font-medium">
-                    Email
+                    {CONTACT_FORM.email}
                   </label>
                   <Input
                     id="email"
                     type="email"
-                    placeholder="john@example.com"
+                    placeholder={CONTACT_FORM.emailPh}
                     required
                     className="h-11"
                   />
@@ -79,22 +81,22 @@ export function Contact() {
               </div>
               <div>
                 <label htmlFor="phone" className="mb-2 block text-sm font-medium">
-                  Phone (optional)
+                  {CONTACT_FORM.phone}
                 </label>
                 <Input
                   id="phone"
                   type="tel"
-                  placeholder="+1 (555) 000-0000"
+                  placeholder={CONTACT_FORM.phonePh}
                   className="h-11"
                 />
               </div>
               <div>
                 <label htmlFor="message" className="mb-2 block text-sm font-medium">
-                  Message
+                  {CONTACT_FORM.message}
                 </label>
                 <Textarea
                   id="message"
-                  placeholder="Tell us how we can help you..."
+                  placeholder={CONTACT_FORM.messagePh}
                   rows={5}
                   required
                 />
@@ -102,18 +104,18 @@ export function Contact() {
               <Button
                 type="submit"
                 size="lg"
-                className="w-full gap-2 bg-indigo-600 hover:bg-indigo-700 sm:w-auto"
+                className="h-12 min-h-12 w-full touch-manipulation gap-2 bg-indigo-600 hover:bg-indigo-700 sm:w-auto"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
                   <>
                     <span className="size-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                    Sending...
+                    {CONTACT_FORM.sending}
                   </>
                 ) : (
                   <>
                     <Send className="size-4" />
-                    Send Message
+                    {CONTACT_FORM.submit}
                   </>
                 )}
               </Button>
@@ -139,7 +141,7 @@ export function Contact() {
 
             <div>
               <p className="mb-3 text-sm font-medium text-muted-foreground">
-                Follow us
+                {CONTACT_FORM.follow}
               </p>
               <div className="flex gap-3">
                 {SOCIALS.map((social) => (
@@ -159,9 +161,9 @@ export function Contact() {
               <div className="flex h-48 items-center justify-center text-muted-foreground">
                 <div className="text-center">
                   <MapPin className="mx-auto mb-2 size-8 text-indigo-500/50" />
-                  <p className="text-sm">Map Integration Placeholder</p>
+                  <p className="text-sm">{CONTACT_FORM.mapTitle}</p>
                   <p className="text-xs text-muted-foreground">
-                    San Francisco, CA 94105
+                    {CONTACT_INFO.address}
                   </p>
                 </div>
               </div>

@@ -8,8 +8,9 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Menu, GraduationCap } from "lucide-react";
-import { NAV_LINKS, SITE_NAME } from "@/lib/constants";
+import { Menu } from "lucide-react";
+import { BrandLogoIcon } from "@/components/ui/BrandLogoIcon";
+import { NAV_LINKS, NAVBAR_CTA, SITE_NAME } from "@/lib/constants";
 import { useState } from "react";
 
 export function MobileMenu() {
@@ -24,14 +25,22 @@ export function MobileMenu() {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className="lg:hidden" aria-label="Open menu">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="size-10 touch-manipulation lg:hidden"
+          aria-label="Menyu"
+        >
           <Menu className="size-5" />
         </Button>
       </SheetTrigger>
-      <SheetContent side="right" className="w-80">
+      <SheetContent
+        side="right"
+        className="w-[min(100vw-1rem,20rem)] pb-[max(1rem,env(safe-area-inset-bottom))] pt-[env(safe-area-inset-top)] sm:w-80"
+      >
         <SheetHeader>
           <SheetTitle className="flex items-center gap-2">
-            <GraduationCap className="size-6 text-indigo-600" />
+            <BrandLogoIcon className="size-6" />
             {SITE_NAME}
           </SheetTitle>
         </SheetHeader>
@@ -40,16 +49,16 @@ export function MobileMenu() {
             <button
               key={link.href}
               onClick={() => handleClick(link.href)}
-              className="rounded-lg px-4 py-3 text-left text-base font-medium transition-colors hover:bg-muted"
+              className="min-h-12 touch-manipulation rounded-lg px-4 py-3 text-left text-base font-medium transition-colors hover:bg-muted"
             >
               {link.label}
             </button>
           ))}
           <Button
-            className="mt-4 w-full bg-indigo-600 hover:bg-indigo-700"
+            className="mt-4 h-12 min-h-12 w-full touch-manipulation bg-indigo-600 hover:bg-indigo-700"
             onClick={() => handleClick("#pricing")}
           >
-            Get Started
+            {NAVBAR_CTA}
           </Button>
         </nav>
       </SheetContent>

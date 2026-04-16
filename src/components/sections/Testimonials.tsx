@@ -1,11 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Star, Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { TESTIMONIALS } from "@/lib/constants";
+import { TESTIMONIALS, SECTION_COPY } from "@/lib/constants";
 import { fadeInUp, viewportConfig } from "@/lib/animations";
 
 export function Testimonials() {
@@ -27,15 +28,12 @@ export function Testimonials() {
   }, [isPaused, next]);
 
   const testimonial = TESTIMONIALS[current];
+  const { badge, title, subtitle } = SECTION_COPY.testimonials;
 
   return (
-    <section id="testimonials" className="bg-muted/30 py-20 lg:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHeading
-          badge="Student Reviews"
-          title="What Our Students Say"
-          subtitle="Don't just take our word for it. Hear from thousands of satisfied learners."
-        />
+    <section id="testimonials" className="bg-muted/30 py-12 sm:py-16 md:py-20 lg:py-32">
+      <div className="mx-auto max-w-7xl px-3 min-[400px]:px-4 sm:px-6 lg:px-8">
+        <SectionHeading badge={badge} title={title} subtitle={subtitle} />
 
         <motion.div
           variants={fadeInUp}
@@ -46,7 +44,7 @@ export function Testimonials() {
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          <div className="overflow-hidden rounded-2xl border bg-card p-8 shadow-sm sm:p-12">
+          <div className="overflow-hidden rounded-2xl border bg-card p-5 shadow-sm min-[400px]:p-6 sm:p-10 md:p-12">
             <Quote className="mb-6 size-10 text-indigo-500/20" />
 
             <AnimatePresence mode="wait">
@@ -57,23 +55,27 @@ export function Testimonials() {
                 exit={{ opacity: 0, x: -30 }}
                 transition={{ duration: 0.3 }}
               >
-                <p className="mb-8 text-lg leading-relaxed text-foreground/90 sm:text-xl">
-                  &ldquo;{testimonial.quote}&rdquo;
+                <p className="mb-6 text-base leading-relaxed text-foreground/90 sm:mb-8 sm:text-lg md:text-xl">
+                  «{testimonial.quote}»
                 </p>
 
-                <div className="flex items-center gap-4">
-                  <div className="flex size-12 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-500">
-                    <span className="text-lg font-bold text-white">
-                      {testimonial.name.charAt(0)}
-                    </span>
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-4">
+                  <div className="relative size-12 shrink-0 overflow-hidden rounded-full border-2 border-indigo-500/30 bg-muted">
+                    <Image
+                      src={testimonial.avatar}
+                      alt={testimonial.name}
+                      fill
+                      className="object-cover"
+                      sizes="48px"
+                    />
                   </div>
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <p className="font-semibold">{testimonial.name}</p>
                     <p className="text-sm text-muted-foreground">
-                      {testimonial.role} &middot; {testimonial.course}
+                      {testimonial.role} · {testimonial.course}
                     </p>
                   </div>
-                  <div className="ml-auto flex gap-0.5">
+                  <div className="flex shrink-0 gap-0.5 sm:ml-auto">
                     {Array.from({ length: 5 }).map((_, i) => (
                       <Star
                         key={i}
@@ -90,13 +92,13 @@ export function Testimonials() {
             </AnimatePresence>
           </div>
 
-          <div className="mt-8 flex items-center justify-center gap-4">
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3 sm:mt-8 sm:gap-4">
             <Button
               variant="outline"
               size="icon"
               onClick={prev}
-              aria-label="Previous testimonial"
-              className="size-10 rounded-full"
+              aria-label="Oldingi sharh"
+              className="size-11 touch-manipulation rounded-full sm:size-10"
             >
               <ChevronLeft className="size-4" />
             </Button>
@@ -105,8 +107,9 @@ export function Testimonials() {
               {TESTIMONIALS.map((_, i) => (
                 <button
                   key={i}
+                  type="button"
                   onClick={() => setCurrent(i)}
-                  aria-label={`Go to testimonial ${i + 1}`}
+                  aria-label={`Sharh ${i + 1}`}
                   className={`size-2.5 rounded-full transition-all ${
                     i === current
                       ? "w-8 bg-indigo-600"
@@ -120,8 +123,8 @@ export function Testimonials() {
               variant="outline"
               size="icon"
               onClick={next}
-              aria-label="Next testimonial"
-              className="size-10 rounded-full"
+              aria-label="Keyingi sharh"
+              className="size-11 touch-manipulation rounded-full sm:size-10"
             >
               <ChevronRight className="size-4" />
             </Button>
