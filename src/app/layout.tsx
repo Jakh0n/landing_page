@@ -71,9 +71,9 @@ export const metadata: Metadata = {
     description: SEO_DESCRIPTION,
     images: [
       {
-        url: "/og.png",
-        width: 1024,
-        height: 502,
+        url: "https://ezyly.vercel.app/og.png",
+        width: 1200,
+        height: 630,
         alt: `${SITE_NAME} — IELTS hero`,
       },
     ],
